@@ -11,64 +11,67 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-  function displayProducts(list,id){
-    const c=document.getElementById(id);
-    if(!c) return;
+  // ✅ MAKE FUNCTION GLOBAL
+  window.addToCart = function(id){
+    const product = products.find(p => p.id === id);
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCart();
+  }
 
-    c.innerHTML=list.map(p=>`
+  function displayProducts(list, id){
+    const container = document.getElementById(id);
+    if(!container) return;
+
+    container.innerHTML = list.map(p => `
       <div class="card">
         <img src="${p.image}">
         <h3>${p.name}</h3>
         <p>₹${p.price}</p>
-        <button onclick="addToCart(${p.id})" class="btn">Add</button>
+        <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
       </div>
     `).join('');
   }
 
-  window.addToCart = function(id){
-    cart.push(products.find(p=>p.id===id));
-    localStorage.setItem("cart",JSON.stringify(cart));
-    updateCart();
-  }
-
   function updateCart(){
-    let el=document.getElementById("cart-count");
-    if(el) el.innerText=cart.length;
+    const el = document.getElementById("cart-count");
+    if(el) el.innerText = cart.length;
   }
 
   function displayCart(){
-    let c=document.getElementById("cart-items"),t=0;
+    const c = document.getElementById("cart-items");
+    const totalEl = document.getElementById("total");
     if(!c) return;
 
-    c.innerHTML=cart.map((i,idx)=>{
-      t+=i.price;
-      return `<div>${i.name} - ₹${i.price}</div>`;
+    let total = 0;
+    c.innerHTML = cart.map((item, i) => {
+      total += item.price;
+      return `<div>${item.name} - ₹${item.price}</div>`;
     }).join('');
 
-    let total=document.getElementById("total");
-    if(total) total.innerText=t;
+    if(totalEl) totalEl.innerText = total;
   }
 
   function checkout(){
-    let form=document.getElementById("checkout-form");
+    const form = document.getElementById("checkout-form");
     if(!form) return;
 
-    form.addEventListener("submit",e=>{
+    form.addEventListener("submit", e => {
       e.preventDefault();
 
-      let orderId = "ORD" + Date.now();
+      const orderId = "ORD" + Date.now();
+
       document.getElementById("order-success").innerHTML =
-        `✅ Order Placed! ID: ${orderId}`;
+        `✅ Order placed successfully! <br> Order ID: ${orderId}`;
 
       localStorage.removeItem("cart");
     });
   }
 
-  // RUN AFTER PAGE LOAD
+  // ✅ RUN AFTER LOAD
+  displayProducts(products, "featured-products");
+  displayProducts(products, "product-list");
   updateCart();
-  displayProducts(products,"product-list");
-  displayProducts(products,"featured-products");
   displayCart();
   checkout();
-
 });
