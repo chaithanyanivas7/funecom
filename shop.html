@@ -1,26 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Shop</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="nav">
   <h2>ShopX</h2>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
-  </ul>
+  <input type="text" id="search" placeholder="Search...">
 </header>
 
-<div class="filter-bar">
-  <input type="text" id="search" placeholder="Search...">
+<div class="filters">
+  <button onclick="filterProducts('all')">All</button>
+  <button onclick="filterProducts('budget')">Under ₹2000</button>
+  <button onclick="filterProducts('premium')">Premium</button>
 </div>
 
-<section class="products" id="product-list"></section>
+<section id="product-list" class="products"></section>
 
 <script src="script.js"></script>
 </body>
