@@ -1,10 +1,48 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
-const products=[
-{id:1,name:"Sony Headphones",price:3000,cat:"premium",img:"https://picsum.photos/200?1"},
-{id:2,name:"Boat Headphones",price:1500,cat:"budget",img:"https://picsum.photos/200?2"},
-{id:3,name:"JBL Earbuds",price:2000,cat:"budget",img:"https://picsum.photos/200?3"},
-{id:4,name:"Noise Cancelling Pro",price:5000,cat:"premium",img:"https://picsum.photos/200?4"}
+const products = [
+  {
+    id:1,
+    name:"Sony Headphones",
+    price:3000,
+    category:"premium",
+    img:"https://m.media-amazon.com/images/I/61v1Y2F8VJL._SX522_.jpg"
+  },
+  {
+    id:2,
+    name:"Boat Headphones",
+    price:1500,
+    category:"budget",
+    img:"https://m.media-amazon.com/images/I/61kWB+uzR2L._SX522_.jpg"
+  },
+  {
+    id:3,
+    name:"JBL Earbuds",
+    price:2000,
+    category:"budget",
+    img:"https://m.media-amazon.com/images/I/61Q6R0N3QzL._SX522_.jpg"
+  },
+  {
+    id:4,
+    name:"Noise Cancelling Pro",
+    price:5000,
+    category:"premium",
+    img:"https://m.media-amazon.com/images/I/71o8Q5XJS5L._SX522_.jpg"
+  },
+  {
+    id:5,
+    name:"Gaming Headset",
+    price:2800,
+    category:"premium",
+    img:"https://m.media-amazon.com/images/I/71Y7tYV0s1L._SX522_.jpg"
+  },
+  {
+    id:6,
+    name:"Wireless Earphones",
+    price:1200,
+    category:"budget",
+    img:"https://m.media-amazon.com/images/I/61CGHv6kmWL._SX522_.jpg"
+  }
 ];
 
 let cart=JSON.parse(localStorage.getItem("cart"))||[];
