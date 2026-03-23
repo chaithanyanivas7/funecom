@@ -1,77 +1,63 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",()=>{
 
-  const products = [
-    {id:1,name:"Luxury Watch",price:2500,image:"https://picsum.photos/200?1"},
-    {id:2,name:"Sneakers",price:1800,image:"https://picsum.photos/200?2"},
-    {id:3,name:"Headphones",price:2200,image:"https://picsum.photos/200?3"},
-    {id:4,name:"Backpack",price:1500,image:"https://picsum.photos/200?4"},
-    {id:5,name:"Sunglasses",price:900,image:"https://picsum.photos/200?5"},
-    {id:6,name:"Perfume",price:3000,image:"https://picsum.photos/200?6"}
-  ];
+const products=[
+{id:1,name:"Sony Headphones",price:3000,cat:"premium",img:"https://picsum.photos/200?1"},
+{id:2,name:"Boat Headphones",price:1500,cat:"budget",img:"https://picsum.photos/200?2"},
+{id:3,name:"JBL Earbuds",price:2000,cat:"budget",img:"https://picsum.photos/200?3"},
+{id:4,name:"Noise Cancelling Pro",price:5000,cat:"premium",img:"https://picsum.photos/200?4"}
+];
 
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let cart=JSON.parse(localStorage.getItem("cart"))||[];
 
-  // ✅ MAKE FUNCTION GLOBAL
-  window.addToCart = function(id){
-    const product = products.find(p => p.id === id);
-    cart.push(product);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCart();
-  }
+window.addToCart=id=>{
+cart.push(products.find(p=>p.id===id));
+localStorage.setItem("cart",JSON.stringify(cart));
+updateCart();
+}
 
-  function displayProducts(list, id){
-    const container = document.getElementById(id);
-    if(!container) return;
+window.filterProducts=type=>{
+if(type==='all') display(products);
+else display(products.filter(p=>p.cat===type));
+}
 
-    container.innerHTML = list.map(p => `
-      <div class="card">
-        <img src="${p.image}">
-        <h3>${p.name}</h3>
-        <p>₹${p.price}</p>
-        <button class="btn" onclick="addToCart(${p.id})">Add to Cart</button>
-      </div>
-    `).join('');
-  }
+function display(list){
+let el=document.getElementById("product-list")||document.getElementById("featured-products");
+if(!el) return;
+el.innerHTML=list.map(p=>`
+<div class="card">
+<img src="${p.img}">
+<h3>${p.name}</h3>
+<p>₹${p.price}</p>
+<button onclick="addToCart(${p.id})" class="btn">Add</button>
+</div>`).join('');
+}
 
-  function updateCart(){
-    const el = document.getElementById("cart-count");
-    if(el) el.innerText = cart.length;
-  }
+function updateCart(){
+let c=document.getElementById("cart-count");
+if(c) c.innerText=cart.length;
+}
 
-  function displayCart(){
-    const c = document.getElementById("cart-items");
-    const totalEl = document.getElementById("total");
-    if(!c) return;
+function displayCart(){
+let el=document.getElementById("cart-items"),t=0;
+if(!el) return;
+el.innerHTML=cart.map(i=>{t+=i.price;return `<p>${i.name} - ₹${i.price}</p>`}).join('');
+document.getElementById("total").innerText=t;
+}
 
-    let total = 0;
-    c.innerHTML = cart.map((item, i) => {
-      total += item.price;
-      return `<div>${item.name} - ₹${item.price}</div>`;
-    }).join('');
+function checkout(){
+let f=document.getElementById("checkout-form");
+if(!f) return;
+f.addEventListener("submit",e=>{
+e.preventDefault();
+let id="ORD"+Date.now();
+document.getElementById("order-success").innerHTML=`✅ Success! ID: ${id}`;
+localStorage.removeItem("cart");
+});
+}
 
-    if(totalEl) totalEl.innerText = total;
-  }
+updateCart();
+display(products);
+displayCart();
+checkout();
 
-  function checkout(){
-    const form = document.getElementById("checkout-form");
-    if(!form) return;
-
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-
-      const orderId = "ORD" + Date.now();
-
-      document.getElementById("order-success").innerHTML =
-        `✅ Order placed successfully! <br> Order ID: ${orderId}`;
-
-      localStorage.removeItem("cart");
-    });
-  }
-
-  // ✅ RUN AFTER LOAD
-  displayProducts(products, "featured-products");
-  displayProducts(products, "product-list");
-  updateCart();
-  displayCart();
-  checkout();
 });
