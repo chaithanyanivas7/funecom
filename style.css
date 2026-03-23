@@ -1,67 +1,23 @@
-body {
-  list-style:none;
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: #000;
 }
 
-.nav li { margin:0 15px; }
-.nav a { color:#d4af37; text-decoration:none; }
-
-.hero {
-  height:60vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:url('https://picsum.photos/1200/500') center/cover;
-  text-align:center;
+.nav ul {
+  display: flex;
+  gap: 20px;
+  list-style: none;
 }
 
-.btn {
-  background:#d4af37;
-  padding:10px 20px;
-  color:black;
-  border:none;
-  cursor:pointer;
+.nav li {
+  list-style: none;
 }
 
-.section-title {
-  text-align:center;
-  margin:20px 0;
-}
-
-.products {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:20px;
-  padding:20px;
-}
-
-.card {
-  background:#1c1c1c;
-  border-radius:10px;
-  padding:15px;
-  transition:0.3s;
-}
-
-.card:hover {
-  transform:scale(1.05);
-}
-
-.card img { width:100%; border-radius:10px; }
-
-.cart-box, .form {
-  width:90%;
-  max-width:500px;
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
-.form input {
-  padding:10px;
-}
-
-.success-box {
-  text-align:center;
-  margin-top:20px;
-  color:lightgreen;
+.nav a {
+  color: #d4af37;
+  text-decoration: none;
+  font-weight: bold;
 }
