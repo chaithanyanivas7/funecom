@@ -3,29 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShopX - Home</title>
+<title>ShopX Pro</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <header class="nav">
   <h2>ShopX</h2>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="cart.html">Cart (<span id="cart-count">0</span>)</a></li>
-  </ul>
+  <div class="nav-right">
+    <input type="text" id="search" placeholder="Search products...">
+    <a href="cart.html">🛒 <span id="cart-count">0</span></a>
+  </div>
 </header>
 
 <section class="hero">
   <div>
-    <h1>Luxury Shopping Experience</h1>
-    <p>Discover premium products</p>
-    <a href="shop.html" class="btn">Explore</a>
+    <h1>Next-Level Shopping</h1>
+    <p>Premium gadgets & accessories</p>
+    <a href="shop.html" class="btn">Shop Now</a>
   </div>
 </section>
 
-<h2 class="section-title">Featured Products</h2>
-<section class="products" id="featured-products"></section>
+<h2 class="section-title">🔥 Trending Products</h2>
+<section id="featured-products" class="products"></section>
 
 <script src="script.js"></script>
 </body>
